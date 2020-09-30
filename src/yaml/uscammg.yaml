@@ -1,0 +1,3473 @@
+swagger: '2.0'
+info:
+  description: API dell'applicazione per i Medici USCA.
+  version: v1
+  title: Interventi e diari pazienti
+  contact:
+    name: CSI Piemonte
+basePath: /restfacade/be
+tags:
+  - name: adicovid
+  - name: adicovid-dettagli
+  - name: consensi-farmaci
+  - name: consenso-tipi
+  - name: currentUser
+  - name: diari
+  - name: diario-dettagli
+  - name: documenti
+  - name: farmaci
+  - name: monitoraggio-tipi
+  - name: notifica-azioni
+  - name: notifica-eventi
+  - name: notifica-priorita
+  - name: notifica-tipi
+  - name: notifica-utente-tipi
+  - name: notifiche
+  - name: ossigenoterapie
+  - name: prescrizione-tipi
+  - name: scheda-stati
+  - name: schede
+  - name: sintomi
+  - name: Soggetti
+  - name: Strutture
+  - name: Utenti
+schemes:
+  - http
+  - https
+paths:
+  '/adicovid/{adicovid_id}/chiudi-monitoraggio':
+    put:
+      tags:
+        - adicovid
+      operationId: adiCovidChiudiMonitoraggioPut_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: adicovid_id
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Payload10'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /adicovid:
+    get:
+      tags:
+        - adicovid
+      operationId: adiCovidGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: idAdiCovid
+          in: query
+          required: false
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelAdiCovid'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /adicovid-dettagli:
+    post:
+      tags:
+        - adicovid-dettagli
+      operationId: adiCovidDettagliPost_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: idAdiCovid
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Payload9'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/ModelAdiCovidDettaglio'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /consensi-farmaci:
+    get:
+      tags:
+        - consensi-farmaci
+      operationId: consensiFarmaciGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: soggetto
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: farmaco
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: tipo
+          in: query
+          required: false
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelConsensoFarmaco'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /consenso-tipi:
+    get:
+      tags:
+        - consenso-tipi
+      operationId: consensoTipiGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelConsensoTipo'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /currentUser:
+    get:
+      tags:
+        - currentUser
+      operationId: currentUserGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModelUtente'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /diari:
+    get:
+      tags:
+        - diari
+      operationId: diariGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: soggetto
+          in: query
+          required: false
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelDiario'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /diario-dettagli:
+    post:
+      tags:
+        - diario-dettagli
+      operationId: diarioDettagliPost_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Payload3'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/ModelDiarioDettaglio'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  '/documenti/{documento_id}':
+    get:
+      tags:
+        - documenti
+      operationId: documentiDocumentoIdGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: documento_id
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StreamingOutput'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /farmaci:
+    get:
+      tags:
+        - farmaci
+      operationId: farmaciGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelFarmaco'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /monitoraggio-tipi:
+    get:
+      tags:
+        - monitoraggio-tipi
+      operationId: monitoraggioTipiGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelMonitoraggioTipo'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /notifica-azioni:
+    get:
+      tags:
+        - notifica-azioni
+      operationId: notificaAzioniGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelNotificaAzione'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /notifica-eventi:
+    get:
+      tags:
+        - notifica-eventi
+      operationId: notificaEventiGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelNotificaEvento'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /notifica-priorita:
+    get:
+      tags:
+        - notifica-priorita
+      operationId: notificaPrioritaGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelNotificaPriorita'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /notifica-tipi:
+    get:
+      tags:
+        - notifica-tipi
+      operationId: notificaTipiGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelNotificaTipo'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /notifica-utente-tipi:
+    get:
+      tags:
+        - notifica-utente-tipi
+      operationId: notificaUtenteTipiGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelNotificaUtenteTipo'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /notifiche/presa-visione:
+    put:
+      tags:
+        - notifiche
+      operationId: notifichePresaVisionePut_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Payload7'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  '/notifiche/{notifica_id}/azione':
+    put:
+      tags:
+        - notifiche
+      operationId: notificaIdAzionePut_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: notifica_id
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Payload6'
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /notifiche/count:
+    get:
+      tags:
+        - notifiche
+      operationId: notificheCountGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: idEnte
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: struttura
+          in: query
+          required: false
+          type: string
+        - name: tipoUtenteMitt
+          in: query
+          required: false
+          type: string
+        - name: tipoUtenteDest
+          in: query
+          required: false
+          type: string
+        - name: cfUtenteDestinatario
+          in: query
+          required: false
+          type: string
+        - name: eventoCodeIn
+          in: query
+          required: false
+          type: string
+        - name: eventoCodeNotIn
+          in: query
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /notifiche:
+    get:
+      tags:
+        - notifiche
+      operationId: notificheGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: idEnte
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: struttura
+          in: query
+          required: false
+          type: string
+        - name: tipoUtenteMitt
+          in: query
+          required: false
+          type: string
+        - name: tipoUtenteDest
+          in: query
+          required: false
+          type: string
+        - name: cfUtenteDestinatario
+          in: query
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+    post:
+      tags:
+        - notifiche
+      operationId: notifichePost_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Payload5'
+      responses:
+        '201':
+          description: Created
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /ossigenoterapie:
+    get:
+      tags:
+        - ossigenoterapie
+      operationId: ossigenoterapieGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelOssigenoterapia'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /prescrizione-tipi:
+    get:
+      tags:
+        - prescrizione-tipi
+      operationId: prescrizioneTipiGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelPrescrizioneTipo'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /scheda-stati:
+    get:
+      tags:
+        - scheda-stati
+      operationId: schedaStatiGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelSchedaStato'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  '/schede/{scheda_id}/intervento':
+    post:
+      tags:
+        - schede
+      operationId: schedeSchedaIdInterventoPost_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: scheda_id
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Payload2'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/ModelScheda'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  '/schede/{scheda_id}/stato':
+    put:
+      tags:
+        - schede
+      operationId: schedeSchedaIdStatoPut_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: scheda_id
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Payload1'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModelScheda'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  '/schede/{scheda_id}/visibilita':
+    put:
+      tags:
+        - schede
+      operationId: schedeFlagVisibilitaPut_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: scheda_id
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Payload'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModelScheda'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  '/schede/{scheda_id}/terapiaCronica':
+    put:
+      tags:
+        - schede
+      operationId: schedeTerapiaCronicaPut_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: scheda_id
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Payload'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModelScheda'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  '/schede/{scheda_id}/intervento-tipi':
+    get:
+      tags:
+        - schede
+      operationId: schedeSchedaIdInterventoTipiGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: scheda_id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelInterventoTipo'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  '/schede/interventi/{id_intervento}':
+    delete:
+      tags:
+        - schede
+      operationId: schedeDeleteIntervento_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: id_intervento
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  '/schede/{scheda_id}/monitoraggio-tipo':
+    put:
+      tags:
+        - schede
+      operationId: schedeMonitoraggioTipoPut_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: scheda_id
+          in: path
+          required: true
+          type: integer
+          format: int32
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: '#/definitions/Payload8'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModelScheda'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  '/schede/{scheda_id}/intervento-azioni':
+    get:
+      tags:
+        - schede
+      operationId: schedeSchedaIdInterventoAzioniGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: scheda_id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelInterventoAzione'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /schede:
+    get:
+      tags:
+        - schede
+      operationId: schedeGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: soggetto
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: stati
+          in: query
+          required: false
+          type: string
+        - name: medico
+          in: query
+          required: false
+          type: string
+        - name: idMonitoraggioTipo
+          in: query
+          required: false
+          type: string
+        - name: filter
+          in: query
+          required: false
+          type: string
+        - name: idStruttura
+          in: query
+          required: false
+          type: string
+        - name: codSchStato
+          in: query
+          required: false
+          type: string
+        - name: orderby
+          in: query
+          required: false
+          type: string
+        - name: rowPerPage
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: pageNumber
+          in: query
+          required: false
+          type: integer
+          format: int64
+        - name: descending
+          in: query
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelScheda'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+    post:
+      tags:
+        - schede
+      operationId: schedePost_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Payload'
+      responses:
+        '201':
+          description: Created
+          schema:
+            $ref: '#/definitions/ModelScheda'
+          headers:
+            Rows-Number:
+              type: integer
+              format: int64
+              description: Numero totale elementi
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /schede/report/xlsx:
+    get:
+      tags:
+        - schede
+      operationId: schedeGetXlsx_1
+      produces:
+        - application/xlsx
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: stati
+          in: query
+          required: false
+          type: string
+        - name: strutture
+          in: query
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/StreamingOutput'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /sintomi:
+    get:
+      tags:
+        - sintomi
+      operationId: sintomiGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelSintomo'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  '/soggetti/by-nome-cognome/{nome}/{cognome}/{dataNascita}':
+    get:
+      tags:
+        - Soggetti
+      operationId: soggettiSoggettoNomeCognomeGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: nome
+          in: path
+          required: true
+          type: string
+        - name: cognome
+          in: path
+          required: true
+          type: string
+        - name: dataNascita
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModelSoggetto'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  '/soggetti/{soggetto_id}':
+    get:
+      tags:
+        - Soggetti
+      operationId: soggettiSoggettoIdGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: soggetto_id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModelSoggetto'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  '/soggetti/by-cf/{codice_fiscale}':
+    get:
+      tags:
+        - Soggetti
+      operationId: soggettiSoggettoCfGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: codice_fiscale
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModelSoggetto'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  /strutture/usca:
+    get:
+      tags:
+        - Strutture
+      operationId: struttureUscaGet_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+      responses:
+        '200':
+          description: Success
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ModelStruttura'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+  '/utenti/{utente_cf}/contatti':
+    put:
+      tags:
+        - Utenti
+      operationId: utentiUtenteCfContattiPut_1
+      produces:
+        - application/json
+      parameters:
+        - name: Shib-Identita-CodiceFiscale
+          in: header
+          required: true
+          type: string
+        - name: X-Applicazione-Codice
+          in: header
+          required: true
+          type: string
+        - name: X-Request-Id
+          in: header
+          required: true
+          type: string
+        - name: X-Forwarded-For
+          in: header
+          required: true
+          type: string
+        - name: User-Agent
+          in: header
+          required: false
+          type: string
+        - name: utente_cf
+          in: path
+          required: true
+          type: string
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Payload4'
+      responses:
+        '200':
+          description: Success
+          schema:
+            $ref: '#/definitions/ModelUtenteContatto'
+        '400':
+          description: 'Bad request, ricontrollare parametri in input'
+          schema:
+            $ref: '#/definitions/Errore'
+        '401':
+          description: Utente non autorizzato a compiere l'operazione
+          schema:
+            $ref: '#/definitions/Errore'
+        '404':
+          description: Risorsa non trovata
+          schema:
+            $ref: '#/definitions/Errore'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Errore'
+definitions:
+  Errore:
+    type: object
+    properties:
+      codice:
+        type: string
+      descrizione:
+        type: string
+  Payload10:
+    type: object
+    properties:
+      adiCovidDataFine:
+        type: string
+        format: date-time
+  ModelAdiCovid:
+    type: object
+    properties:
+      adiCovidId:
+        type: integer
+        format: int32
+      dataAdiCovidInizio:
+        type: string
+        format: date-time
+      dataAdiCovidFine:
+        type: string
+        format: date-time
+      noteAdiCovid:
+        type: string
+      dataCreazione:
+        type: string
+        format: date-time
+      dataModifica:
+        type: string
+        format: date-time
+      dettagli:
+        type: array
+        items:
+          $ref: '#/definitions/ModelAdiCovidDettaglio'
+  ModelAdiCovidDettaglio:
+    type: object
+    properties:
+      adiCovidDettaglioId:
+        type: integer
+        format: int32
+      adicovidDettaglioData:
+        type: string
+        format: date-time
+      adiCovidDettaglioNote:
+        type: string
+      adiCovidId:
+        type: integer
+        format: int32
+      dataCreazione:
+        type: string
+        format: date-time
+      dataModifica:
+        type: string
+        format: date-time
+  Payload9:
+    type: object
+    properties:
+      adiCovidDetData:
+        type: string
+        format: date-time
+      adiCovidDetNote:
+        type: string
+  ModelConsensoFarmaco:
+    type: object
+    properties:
+      id:
+        type: string
+      data:
+        type: string
+        format: date-time
+      soggettoId:
+        type: integer
+        format: int32
+      farmacoId:
+        type: integer
+        format: int32
+      tipoId:
+        type: integer
+        format: int32
+      tipo:
+        $ref: '#/definitions/ModelConsensoTipo'
+      farmaco:
+        $ref: '#/definitions/ModelFarmaco'
+      documenti:
+        type: array
+        items:
+          $ref: '#/definitions/ModelDocumento'
+  ModelConsensoTipo:
+    type: object
+    properties:
+      id:
+        type: string
+      codice:
+        type: string
+      descrizione:
+        type: string
+  ModelDocumento:
+    type: object
+    properties:
+      id:
+        type: string
+      nome:
+        type: string
+      dimensione:
+        type: integer
+        format: int32
+      note:
+        type: string
+      tipoId:
+        type: integer
+        format: int32
+  ModelFarmaco:
+    type: object
+    properties:
+      id:
+        type: string
+      nome:
+        type: string
+      descrizione:
+        type: string
+      consensoNecessario:
+        type: boolean
+      prescrizioneTipoId:
+        type: integer
+        format: int32
+  ModelProfilo:
+    type: object
+    properties:
+      idProfilo:
+        type: integer
+        format: int32
+      nomeProfilo:
+        type: string
+  ModelUtente:
+    type: object
+    properties:
+      cfUtente:
+        type: string
+      nome:
+        type: string
+      cognome:
+        type: string
+      telefono:
+        type: string
+      email:
+        type: string
+      elencoStruttura:
+        type: array
+        items:
+          $ref: '#/definitions/ModelUtenteElencoStruttura'
+      elencoProfili:
+        type: array
+        items:
+          $ref: '#/definitions/ModelProfilo'
+  ModelUtenteElencoStruttura:
+    type: object
+    properties:
+      idStruttura:
+        type: string
+      idEnte:
+        type: integer
+        format: int32
+      nome:
+        type: string
+      natura:
+        type: string
+  ModelDiario:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      dataCreazione:
+        type: string
+        format: date-time
+      dettagli:
+        type: array
+        items:
+          $ref: '#/definitions/ModelDiarioDettaglio'
+  ModelDiarioDettaglio:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      data:
+        type: string
+        format: date-time
+      note:
+        type: string
+      idAdiCovid:
+        type: integer
+        format: int32
+      dataCreazione:
+        type: string
+        format: date-time
+      dataModifica:
+        type: string
+        format: date-time
+      diarioId:
+        type: integer
+        format: int32
+      interventoId:
+        type: integer
+        format: int32
+      autore:
+        $ref: '#/definitions/ModelDiarioDettaglioAutore'
+      sintomi:
+        type: array
+        items:
+          $ref: '#/definitions/ModelDiarioDettaglioSintomo'
+      adiCovid:
+        $ref: '#/definitions/ModelAdiCovid'
+  ModelDiarioDettaglioAutore:
+    type: object
+    properties:
+      codiceFiscale:
+        type: string
+      nome:
+        type: string
+      cognome:
+        type: string
+      telefono:
+        type: string
+      mail:
+        type: string
+  ModelDiarioDettaglioSintomo:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      codice:
+        type: string
+      nome:
+        type: string
+      misurabile:
+        type: boolean
+      unitaMisura:
+        type: string
+      note:
+        type: string
+      valore:
+        type: number
+  Payload3:
+    type: object
+    properties:
+      data:
+        type: string
+        format: date-time
+      note:
+        type: string
+      soggetto:
+        type: integer
+        format: int32
+      intervento:
+        type: integer
+        format: int32
+      sintomi:
+        type: array
+        items:
+          $ref: '#/definitions/ModelDiarioDettaglioSintomo'
+      adiCovid:
+        $ref: '#/definitions/ModelAdiCovid'
+  StreamingOutput:
+    type: object
+  ModelMonitoraggioTipo:
+    type: object
+    properties:
+      id:
+        type: string
+      codice:
+        type: string
+      descrizione:
+        type: string
+  ModelNotificaAzione:
+    type: object
+    properties:
+      id:
+        type: string
+      nome:
+        type: string
+      descrizione:
+        type: string
+  ModelNotificaEvento:
+    type: object
+    properties:
+      id:
+        type: string
+      nome:
+        type: string
+      descrizione:
+        type: string
+  ModelNotificaPriorita:
+    type: object
+    properties:
+      id:
+        type: string
+      nome:
+        type: string
+      descrizione:
+        type: string
+  ModelNotificaTipo:
+    type: object
+    properties:
+      id:
+        type: string
+      nome:
+        type: string
+      descrizione:
+        type: string
+  ModelNotificaUtenteTipo:
+    type: object
+    properties:
+      id:
+        type: string
+      nome:
+        type: string
+      descrizione:
+        type: string
+  ModelNotificaPresaVisione:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      testo:
+        type: string
+  Payload7:
+    type: object
+    properties:
+      notifiche:
+        type: array
+        items:
+          $ref: '#/definitions/ModelNotificaPresaVisione'
+  Payload6:
+    type: object
+    properties:
+      testo:
+        type: string
+  Payload5:
+    type: object
+    properties:
+      descrizione:
+        type: string
+      azione:
+        type: string
+      priorita:
+        type: string
+      evento:
+        type: string
+      tipoNotifica:
+        type: string
+      tipoUtente:
+        type: string
+      tipoUtenteDest:
+        type: string
+      soggettoId:
+        type: integer
+        format: int32
+      cfUtenteRichiesta:
+        type: string
+      struttura:
+        type: string
+      ente:
+        type: integer
+        format: int32
+      cfUtenteDestinatario:
+        type: string
+  ModelOssigenoterapia:
+    type: object
+    properties:
+      id:
+        type: string
+      nome:
+        type: string
+      descrizione:
+        type: string
+  ModelPrescrizioneTipo:
+    type: object
+    properties:
+      id:
+        type: string
+      codice:
+        type: string
+      nome:
+        type: string
+  ModelSchedaStato:
+    type: object
+    properties:
+      codice:
+        type: string
+      nome:
+        type: string
+  ModelEnte:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      nome:
+        type: string
+  ModelIntervento:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      data:
+        type: string
+        format: date-time
+      descrizione:
+        type: string
+      azioneDescrizione:
+        type: string
+      medicoResponsabile:
+        $ref: '#/definitions/ModelUtenteContatto'
+      azione:
+        $ref: '#/definitions/ModelInterventoAzione'
+      tipo:
+        $ref: '#/definitions/ModelInterventoTipo'
+      prescrizioni:
+        type: array
+        items:
+          $ref: '#/definitions/ModelPrescrizione'
+      documenti:
+        type: array
+        items:
+          $ref: '#/definitions/ModelDocumento'
+  ModelInterventoAzione:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      codice:
+        type: string
+      nome:
+        type: string
+  ModelInterventoTipo:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      codice:
+        type: string
+      nome:
+        type: string
+  ModelPrescrizione:
+    type: object
+    properties:
+      id:
+        type: string
+      prescrizione:
+        type: string
+      valore:
+        type: string
+      consegnatoDaFarmacia:
+        type: boolean
+      dataConsegnaFarmacia:
+        type: string
+        format: date-time
+      farmacista:
+        $ref: '#/definitions/ModelUtenteContatto'
+      tipo:
+        $ref: '#/definitions/ModelPrescrizioneTipo'
+      farmaco:
+        $ref: '#/definitions/ModelFarmaco'
+      ossigenoterapia:
+        $ref: '#/definitions/ModelOssigenoterapia'
+  ModelScheda:
+    type: object
+    properties:
+      id:
+        type: string
+      data:
+        type: string
+        format: date-time
+      descrizione:
+        type: string
+      critica:
+        type: boolean
+      terapiaCronica:
+        type: string
+      stato:
+        $ref: '#/definitions/ModelSchedaStato'
+      documenti:
+        type: array
+        items:
+          $ref: '#/definitions/ModelDocumento'
+      soggetto:
+        $ref: '#/definitions/ModelSchedaSoggetto'
+      medico:
+        $ref: '#/definitions/ModelSchedaMedico'
+      usca:
+        $ref: '#/definitions/ModelStruttura'
+      prescrizioni:
+        type: array
+        items:
+          $ref: '#/definitions/ModelPrescrizione'
+      intervento:
+        type: array
+        items:
+          $ref: '#/definitions/ModelIntervento'
+      cronologia:
+        type: array
+        items:
+          $ref: '#/definitions/ModelSchedaCambioStato'
+      richiestaMmg:
+        type: boolean
+      visibileMedEmergenza:
+        type: boolean
+      visibileMedContAssistenziale:
+        type: boolean
+      monitoraggioTipo:
+        $ref: '#/definitions/ModelMonitoraggioTipo'
+      medicoTitolato:
+        $ref: '#/definitions/ModelUtenteMedico'
+      totalCount:
+        type: integer
+        format: int64
+  ModelSchedaCambioStato:
+    type: object
+    properties:
+      dataInizio:
+        type: string
+        format: date-time
+      dataFine:
+        type: string
+        format: date-time
+      schedaId:
+        type: integer
+        format: int32
+      stato:
+        $ref: '#/definitions/ModelSchedaStato'
+      utente:
+        $ref: '#/definitions/ModelSchedaCambioStatoUtente'
+  ModelSchedaCambioStatoUtente:
+    type: object
+    properties:
+      codiceFiscale:
+        type: string
+      nome:
+        type: string
+      cognome:
+        type: string
+      telefono:
+        type: string
+      email:
+        type: string
+  ModelSchedaMedico:
+    type: object
+    properties:
+      codiceFiscale:
+        type: string
+      nome:
+        type: string
+      cognome:
+        type: string
+      telefono:
+        type: string
+      email:
+        type: string
+  ModelSchedaSoggetto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      codiceFiscale:
+        type: string
+      nome:
+        type: string
+      cognome:
+        type: string
+      dataNascita:
+        type: string
+        format: date-time
+      email:
+        type: string
+      telefono:
+        type: string
+      domicilioIndirizzo:
+        type: string
+      domicilioAsl:
+        type: string
+      residenzaAsl:
+        type: string
+      domicilioComune:
+        $ref: '#/definitions/ModelSchedaSoggettoComune'
+      residenzaComune:
+        $ref: '#/definitions/ModelSchedaSoggettoComune'
+  ModelSchedaSoggettoComune:
+    type: object
+    properties:
+      istat:
+        type: string
+      nome:
+        type: string
+  ModelStruttura:
+    type: object
+    properties:
+      id:
+        type: string
+      nome:
+        type: string
+      natura:
+        type: string
+      ente:
+        $ref: '#/definitions/ModelEnte'
+  ModelUtenteContatto:
+    type: object
+    properties:
+      codiceFiscale:
+        type: string
+      nome:
+        type: string
+      cognome:
+        type: string
+      telefono:
+        type: string
+      email:
+        type: string
+  ModelUtenteMedico:
+    type: object
+    properties:
+      idMedico:
+        type: integer
+        format: int32
+      cfMedico:
+        type: string
+      codiceReg:
+        type: string
+      nome:
+        type: string
+      cognome:
+        type: string
+  Payload2:
+    type: object
+    properties:
+      data:
+        type: string
+        format: date-time
+      descrizione:
+        type: string
+      azioneDescrizione:
+        type: string
+      tipo:
+        type: integer
+        format: int32
+      azione:
+        type: integer
+        format: int32
+      soggetto:
+        type: integer
+        format: int32
+      struttura:
+        type: string
+      documenti:
+        type: array
+        items:
+          $ref: '#/definitions/SchedeConsensoDocumenti'
+      prescrizioni:
+        type: array
+        items:
+          $ref: '#/definitions/SchedePrescrizioni'
+  SchedeConsenso:
+    type: object
+    properties:
+      tipo:
+        type: integer
+        format: int32
+      documenti:
+        type: array
+        items:
+          $ref: '#/definitions/SchedeConsensoDocumenti'
+  SchedeConsensoDocumenti:
+    type: object
+    properties:
+      nome:
+        type: string
+      base64:
+        type: string
+  SchedePrescrizioni:
+    type: object
+    properties:
+      prescrizione:
+        type: string
+      valore:
+        type: string
+      tipo:
+        type: integer
+        format: int32
+      farmaco:
+        type: integer
+        format: int32
+      ossigenoterapia:
+        type: integer
+        format: int32
+      consenso:
+        $ref: '#/definitions/SchedeConsenso'
+  Payload1:
+    type: object
+    properties:
+      stato:
+        type: string
+  Payload:
+    type: object
+    properties:
+      descrizione:
+        type: string
+      critica:
+        type: boolean
+      struttura:
+        type: string
+      stato:
+        type: string
+      soggetto:
+        type: integer
+        format: int32
+      visibileMed118:
+        type: boolean
+      visibileMedCa:
+        type: boolean
+      terapiaCronica:
+        type: string
+      documenti:
+        type: array
+        items:
+          $ref: '#/definitions/SchedeDocumenti'
+      prescrizioni:
+        type: array
+        items:
+          $ref: '#/definitions/SchedePrescrizioni'
+  SchedeDocumenti:
+    type: object
+    properties:
+      nome:
+        type: string
+      base64:
+        type: string
+  Payload8:
+    type: object
+    properties:
+      idTipoMonitoraggio:
+        type: integer
+        format: int32
+  ModelSintomo:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      codice:
+        type: string
+      nome:
+        type: string
+      misurabile:
+        type: boolean
+      unitaMisura:
+        type: string
+  ModelSoggetto:
+    type: object
+    properties:
+      idSoggetto:
+        type: integer
+        format: int32
+      idAsr:
+        type: integer
+        format: int32
+      idTipoSoggetto:
+        type: integer
+        format: int32
+      codiceFiscale:
+        type: string
+      cognome:
+        type: string
+      nome:
+        type: string
+      comuneResidenzaIstat:
+        type: string
+      comuneDomicilioIstat:
+        type: string
+      indirizzodomicilio:
+        type: string
+      telefonoRecapito:
+        type: string
+      dataNascita:
+        type: string
+        format: date-time
+      aslResidenza:
+        type: string
+      aslDomicilio:
+        type: string
+      email:
+        type: string
+      numeroCampioni:
+        type: integer
+        format: int32
+      numeroDecorsi:
+        type: integer
+        format: int32
+      ultimoIdTipoEvento:
+        type: integer
+        format: int32
+      idAura:
+        type: integer
+        format: int32
+      medico:
+        $ref: '#/definitions/ModelSoggettoMedico'
+      asr:
+        $ref: '#/definitions/ModelSoggettoAsr'
+      comuneDomicilio:
+        $ref: '#/definitions/ModelSoggettoComuneDomicilio'
+      comuneResidenza:
+        $ref: '#/definitions/ModelSoggettoComuneDomicilio'
+      elencoTampone:
+        type: array
+        items:
+          $ref: '#/definitions/ModelSoggettoElencoTampone'
+      elencoDecorso:
+        type: array
+        items:
+          $ref: '#/definitions/ModelSoggettoElencoDecorso'
+      elencoContattiDa:
+        type: array
+        items:
+          $ref: '#/definitions/ModelSoggettoContatto'
+      elencoContattiA:
+        type: array
+        items:
+          $ref: '#/definitions/ModelSoggettoContatto'
+  ModelSoggettoArea:
+    type: object
+    properties:
+      idArea:
+        type: integer
+        format: int32
+      idStruttura:
+        type: string
+      idDArea:
+        type: string
+      nome:
+        type: string
+      statoValidita:
+        type: string
+      responsabile:
+        type: string
+      riferimento:
+        type: string
+  ModelSoggettoAsr:
+    type: object
+    properties:
+      idAsr:
+        type: integer
+        format: int32
+      descrizione:
+        type: string
+      idEnte:
+        type: integer
+        format: int32
+  ModelSoggettoComuneDomicilio:
+    type: object
+    properties:
+      istatComune:
+        type: string
+      nomeComune:
+        type: string
+  ModelSoggettoContatto:
+    type: object
+    properties:
+      idSoggetto:
+        type: integer
+        format: int32
+      codiceFiscale:
+        type: string
+      cognome:
+        type: string
+      nome:
+        type: string
+      telefonoRecapito:
+        type: string
+      dataNascita:
+        type: string
+        format: date-time
+      aslResidenza:
+        type: string
+      aslDomicilio:
+        type: string
+      email:
+        type: string
+  ModelSoggettoDecodeTipoEvento:
+    type: object
+    properties:
+      idTipoEvento:
+        type: integer
+        format: int32
+      descTipoEvento:
+        type: string
+      segno:
+        type: string
+  ModelSoggettoElencoDecorso:
+    type: object
+    properties:
+      idDecorso:
+        type: integer
+        format: int32
+      idSoggetto:
+        type: integer
+        format: int32
+      luogoPaziente:
+        type: string
+      descrizioneContesto:
+        type: string
+      comuneRicoveroIstat:
+        type: string
+      idRepRicovero:
+        type: integer
+        format: int32
+      condizioniCliniche:
+        type: string
+      idDimiss:
+        type: integer
+        format: int32
+      sintomi:
+        type: string
+      ospedaleRicovero:
+        type: string
+      dataDimissioni:
+        type: string
+        format: date-time
+      dataInizioSint:
+        type: string
+        format: date-time
+      dataEvento:
+        type: string
+        format: date-time
+      idTipoEvento:
+        type: integer
+        format: int32
+      idAreaa:
+        type: integer
+        format: int32
+      note:
+        type: string
+      dataPrevFineEvento:
+        type: string
+        format: date-time
+      indirizzoDecorso:
+        type: string
+      decorsoPresso:
+        type: string
+      comuneRicovero:
+        type: string
+      esitoDimissioni:
+        type: string
+      repartoRicovero:
+        type: string
+      decodeTipoEvento:
+        $ref: '#/definitions/ModelSoggettoDecodeTipoEvento'
+      sintomo:
+        $ref: '#/definitions/ModelSoggettoSintomo'
+      area:
+        $ref: '#/definitions/ModelSoggettoArea'
+      struttura:
+        $ref: '#/definitions/ModelUtenteElencoStruttura'
+  ModelSoggettoElencoTampone:
+    type: object
+    properties:
+      idTampone:
+        type: integer
+        format: int32
+      idSoggetto:
+        type: integer
+        format: int32
+      idLaboratorio:
+        type: integer
+        format: int32
+      criterioEpidemiologicoCovid19:
+        type: string
+      idTestCovid:
+        type: integer
+        format: int32
+      idRisTamp:
+        type: integer
+        format: int32
+      tamponeAutorizzato:
+        type: string
+      dataInserimentoRichiesta:
+        type: string
+        format: date-time
+      dataUltimaModifica:
+        type: string
+        format: date-time
+      utenteUltimaModifica:
+        type: string
+      dataTest:
+        type: string
+        format: date-time
+      medicoRichiedente:
+        type: string
+      contattoRichiedente:
+        type: string
+      risTampone:
+        type: string
+      laboratorio:
+        $ref: '#/definitions/ModelSoggettoLaboratorio'
+      testCovid:
+        $ref: '#/definitions/ModelSoggettoTestCovid'
+      tamponeMotivo:
+        $ref: '#/definitions/TamponeMotivo'
+  ModelSoggettoLaboratorio:
+    type: object
+    properties:
+      idLaboratorio:
+        type: integer
+        format: int32
+      descrizione:
+        type: string
+      siglaLaboratorio:
+        type: string
+      capacitaGiornaliera:
+        type: integer
+        format: int32
+  ModelSoggettoMedico:
+    type: object
+    properties:
+      cfMedico:
+        type: string
+      codiceReg:
+        type: string
+      nome:
+        type: string
+      cognome:
+        type: string
+  ModelSoggettoSintomo:
+    type: object
+    properties:
+      idSintomo:
+        type: integer
+        format: int32
+      idDecorso:
+        type: integer
+        format: int32
+      temperatura:
+        type: number
+      flgDispnea:
+        type: string
+      flgGusto:
+        type: string
+      flgOlfatto:
+        type: string
+      flgTosse:
+        type: string
+      flgDoloriMusc:
+        type: string
+      flgStanchezza:
+        type: string
+      flgCongiuntivite:
+        type: string
+      flgDiarrea:
+        type: string
+      flgRaffreddore:
+        type: string
+      flgCefalea:
+        type: string
+      flgFaringodinia:
+        type: string
+      noteSintomo:
+        type: string
+  ModelSoggettoTestCovid:
+    type: object
+    properties:
+      idTestCovid:
+        type: integer
+        format: int32
+      testCovid:
+        type: string
+  TamponeMotivo:
+    type: object
+    properties:
+      tamponeMotivoId:
+        type: integer
+        format: int32
+      tamponeMotivoCod:
+        type: string
+      tamponeMotivoDesc:
+        type: string
+      validitaInizio:
+        type: string
+        format: date-time
+      validitaFine:
+        type: string
+        format: date-time
+      utenteOperazione:
+        type: string
+      dataCreazione:
+        type: string
+        format: date-time
+      dataModifica:
+        type: string
+        format: date-time
+      dataCancellazione:
+        type: string
+        format: date-time
+  Payload4:
+    type: object
+    properties:
+      nome:
+        type: string
+      cognome:
+        type: string
+      telefono:
+        type: string
+      email:
+        type: string

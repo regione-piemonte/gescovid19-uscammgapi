@@ -1,0 +1,6 @@
+/build
+/dist
+/lib
+build.xml
+covid_usca-mmg.yaml
+dev-uscammgapi-ds.xml
